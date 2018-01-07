@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <script th:src="@{js/jquery.min.js}"></script>
+        <script th:src="@{js/jquery.validate.min.js}"></script>
+        <script th:src="@{js/userRegistration-validation.js}"></script>
+        <link rel="stylesheet" th:href="@{css/bootstrap.css}" />
+        <link rel="stylesheet" th:href="@{css/style.css}" />
+        <title>user registration</title>
+    </head>
+    <body>
+        <div class="container">
+            <br/>
+            <h3 class="text-muted">Welcome! KITHA registration</h3>
+            <form th:action="@{/newUser}" th:object="${model}" name="formUserRegistration" id="formUserRegistration" method="post">
+                <div class="form-group">
+                    <label class="text-primary" for="inputUser">User:</label>
+                    <input type="text" class="form-control" id="inputUser" placeholder="Enter user" name="userName" th:field="*{userName}"/>
+                </div>
+                <div class="form-group">
+                    <label class="text-primary" for="inputPassword">Password:</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Enter password" name="password" th:field="*{password}"/>
+                </div>
+                <div class="form-group">
+                    <label class="text-primary" for="inputConfirmPassword">Confirm password:</label>
+                    <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Enter confirm password" name="confirmPassword"/>
+                </div>
+                <div class="form-group">
+                    <label class="text-primary" for="inputName">Name:</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Enter name" name="name" th:field="*{name}"/>
+                </div>
+                <button type="submit" class="btn btn-success">Register</button>
+            </form>
+            <br/>
+            <div th:switch="${model.userRegistrationFailed}">
+                <div th:case="true">
+                    <label class="text-danger">this username is already in use!</label>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

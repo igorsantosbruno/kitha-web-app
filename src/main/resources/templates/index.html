@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>login</title>
+        <link rel="stylesheet" th:href="@{css/bootstrap.css}" />
+        <script type="text/javascript">
+            history.pushState(null, null, document.URL);
+            window.addEventListener('popstate', function () {
+                history.pushState(null, null, document.URL);
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <br/>
+            <h3 class="text-muted">Login KITHA</h3>
+            <form th:action="@{/logInto}" th:object="${model}" method="post">
+                <div class="form-group">
+                    <label class="text-primary" for="inputUser">User:</label>
+                    <input type="text" class="form-control" id="inputUser" placeholder="Enter user" name="userName" th:field="*{userName}"/>
+                </div>
+                <div class="form-group">
+                    <label class="text-primary" for="inputPassword">Password:</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Enter password" name="password" th:field="*{password}"/>
+                </div>
+                <button type="submit" class="btn btn-success">Log into</button>
+            </form>
+            <br/>
+            <div th:switch="${model.loginFailed}">
+                <div th:case="true">
+                    <label class="text-danger">Login failed!</label>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
